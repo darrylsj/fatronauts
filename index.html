@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FATRONAUTS | In Space, No One Can Hear You Snack</title>
+  <meta name="description" content="The epic comedy about the unlikely heroes who saved humanity's first mission to Mars. Coming soon as a book and film.">
+  <meta property="og:title" content="FATRONAUTS">
+  <meta property="og:description" content="In space, no one can hear you snack.">
+  <meta property="og:image" content="images/movie-poster.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --space-black: #0a0a0f;
+      --deep-blue: #0d1b2a;
+      --nasa-orange: #FC3D21;
+      --nasa-blue: #0B3D91;
+      --gold: #FFD700;
+      --white: #ffffff;
+      --gray: #a0a0a0;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--space-black);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3 { font-family: 'Orbitron', sans-serif; }
+    
+    /* Starfield background */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: 
+        radial-gradient(1px 1px at 20px 30px, white, transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 50px 160px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 90px 40px, white, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1.5px 1.5px at 160px 120px, white, transparent);
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      animation: twinkle 5s ease-in-out infinite alternate;
+      opacity: 0.5;
+      z-index: 0;
+    }
+    
+    @keyframes twinkle {
+      0% { opacity: 0.4; }
+      100% { opacity: 0.7; }
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+    }
+    
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+    
+    .logo span { color: var(--nasa-orange); }
+    
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    
+    .nav-links a {
+      color: var(--gray);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      font-size: 0.95rem;
+    }
+    
+    .nav-links a:hover { color: var(--white); }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      z-index: 1;
+      background: 
+        linear-gradient(to bottom, transparent 0%, var(--space-black) 100%),
+        linear-gradient(to right, rgba(252,61,33,0.1) 0%, transparent 50%),
+        url('images/hero-walk.png') center center / cover no-repeat;
+    }
+    
+    .hero-content {
+      max-width: 900px;
+    }
+    
+    .tagline {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      color: var(--nasa-orange);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .hero h1 {
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 900;
+      letter-spacing: 8px;
+      margin-bottom: 24px;
+      text-shadow: 0 0 60px rgba(252,61,33,0.5);
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+    
+    .hero h1 span {
+      display: block;
+      background: linear-gradient(135deg, var(--nasa-orange) 0%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: var(--gray);
+      margin-bottom: 48px;
+      animation: fadeInUp 1s ease-out 0.4s both;
+      font-style: italic;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+    
+    .btn {
+      padding: 16px 40px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--nasa-orange) 0%, #ff6b4a 100%);
+      color: white;
+      border: none;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 40px rgba(252,61,33,0.4);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+    
+    .btn-secondary:hover {
+      border-color: white;
+      background: rgba(255,255,255,0.1);
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Premise Section */
+    .premise {
+      padding: 120px 24px;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(to bottom, var(--space-black) 0%, var(--deep-blue) 100%);
+    }
+    
+    .premise-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    
+    .premise-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 24px;
+      color: var(--gold);
+    }
+    
+    .premise-content p {
+      font-size: 1.15rem;
+      color: var(--gray);
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+    
+    .premise-content .highlight {
+      color: var(--white);
+      font-weight: 600;
+    }
+    
+    .premise-image {
+      position: relative;
+    }
+    
+    .premise-image img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
+    
+    .premise-image::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: 20px;
+      bottom: 20px;
+      border: 2px solid var(--nasa-orange);
+      border-radius: 16px;
+      opacity: 0.3;
+    }
+    
+    /* Characters Section */
+    .characters {
+      padding: 120px 24px;
+      position: relative;
+      z-index: 1;
+      background: var(--deep-blue);
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    
+    .section-header p {
+      color: var(--gray);
+      font-size: 1.2rem;
+    }
+    
+    .character-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+    
+    .character-card {
+      background: rgba(255,255,255,0.03);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .character-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    
+    .character-card img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+    
+    .character-info {
+      padding: 24px;
+    }
+    
+    .character-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+      color: var(--nasa-orange);
+    }
+    
+    .character-info .role {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+    
+    .character-info p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.7);
+    }
+    
+    /* Newsletter Section */
+    .newsletter {
+      padding: 120px 24px;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(135deg, var(--nasa-blue) 0%, var(--deep-blue) 100%);
+      text-align: center;
+    }
+    
+    .newsletter-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .newsletter h2 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    
+    .newsletter p {
+      color: var(--gray);
+      margin-bottom: 32px;
+      font-size: 1.1rem;
+    }
+    
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .newsletter-form input {
+      flex: 1;
+      padding: 16px 24px;
+      border-radius: 50px;
+      border: 2px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+      color: white;
+      font-size: 1rem;
+    }
+    
+    .newsletter-form input::placeholder {
+      color: var(--gray);
+    }
+    
+    .newsletter-form input:focus {
+      outline: none;
+      border-color: var(--nasa-orange);
+    }
+    
+    .newsletter-form button {
+      padding: 16px 32px;
+      border-radius: 50px;
+      border: none;
+      background: var(--nasa-orange);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    
+    .newsletter-form button:hover {
+      background: #ff6b4a;
+      transform: scale(1.05);
+    }
+    
+    /* Footer */
+    footer {
+      padding: 40px 24px;
+      text-align: center;
+      background: var(--space-black);
+      color: var(--gray);
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    footer a { color: var(--nasa-orange); text-decoration: none; }
+    
+    /* Responsive */
+    @media (max-width: 968px) {
+      .premise-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      
+      .premise-image { order: -1; }
+      
+      .nav-links { display: none; }
+      
+      .hero h1 { letter-spacing: 4px; }
+    }
+    
+    @media (max-width: 600px) {
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-form button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  
+  <nav>
+    <a href="/" class="logo">FAT<span>RONAUTS</span></a>
+    <ul class="nav-links">
+      <li><a href="#story">The Story</a></li>
+      <li><a href="#characters">Characters</a></li>
+      <li><a href="#book">The Book</a></li>
+      <li><a href="#signup">Get Updates</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="tagline">Coming Soon — Book & Film</p>
+      <h1><span>FATRONAUTS</span></h1>
+      <p class="hero-subtitle">"In space, no one can hear you snack."</p>
+      <div class="hero-buttons">
+        <a href="#signup" class="btn btn-primary">Join the Crew</a>
+        <a href="#story" class="btn btn-secondary">Read the Story</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="premise" id="story">
+    <div class="premise-inner">
+      <div class="premise-content">
+        <h2>The Mission That Changed Everything</h2>
+        <p>The space race to Mars was a disaster. American crews. Chinese crews. Russian crews. <span class="highlight">All dead from radiation exposure</span> — except one.</p>
+        <p>Sergei Volkov wasn't supposed to be on that mission. He was overweight, survived on Oreos and vodka, and had been accidentally left on the manifest. <span class="highlight">He was the only one who made it back alive.</span></p>
+        <p>After years of research, NASA discovered the impossible truth: <span class="highlight">human body fat is the only effective shield against deep-space radiation.</span> The more visceral fat, the better the protection.</p>
+        <p>Now America needs a new kind of astronaut. And they're about to find heroes in the most unlikely places.</p>
+      </div>
+      <div class="premise-image">
+        <img src="images/movie-poster.png" alt="Fatronauts Movie Poster">
+      </div>
+    </div>
+  </section>
+
+  <section class="characters" id="characters">
+    <div class="section-header">
+      <h2>Meet the Crew</h2>
+      <p>The unlikely heroes who will make history</p>
+    </div>
+    <div class="character-grid">
+      <div class="character-card">
+        <img src="images/sergei-portrait.png" alt="Sergei Volkov">
+        <div class="character-info">
+          <h3>Sergei Volkov</h3>
+          <div class="role">The Original Survivor</div>
+          <p>Russian cosmonaut. Vegetarian who lives on Oreos and vodka. The accidental hero who proved fat saves lives.</p>
+        </div>
+      </div>
+      <div class="character-card">
+        <img src="images/placeholder-astronaut.png" alt="Coming Soon">
+        <div class="character-info">
+          <h3>Marcus Chen</h3>
+          <div class="role">Mission Commander</div>
+          <p>Former NASA engineer turned astronaut candidate. Brilliant, self-deprecating, and determined to prove the doubters wrong.</p>
+        </div>
+      </div>
+      <div class="character-card">
+        <img src="images/placeholder-astronaut.png" alt="Coming Soon">
+        <div class="character-info">
+          <h3>Dr. Sarah Mitchell</h3>
+          <div class="role">Flight Trainer</div>
+          <p>Elite NASA trainer skeptical of the Fatronaut program — until she sees what they're truly capable of.</p>
+        </div>
+      </div>
+      <div class="character-card">
+        <img src="images/placeholder-astronaut.png" alt="Coming Soon">
+        <div class="character-info">
+          <h3>Brad Sterling</h3>
+          <div class="role">The Infiltrator</div>
+          <p>Buff, chiseled, and hiding something. His fat suit conceals more than just muscles.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter" id="signup">
+    <div class="newsletter-inner">
+      <h2>🚀 Join the Fatronaut Corps</h2>
+      <p>Be the first to know when the book launches. Get exclusive previews, behind-the-scenes content, and mission updates.</p>
+      <form class="newsletter-form" action="https://formsubmit.co/darrylsj@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New Fatronaut Recruit!">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://fatronauts.com/?joined=true">
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <button type="submit">Enlist Now</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Fatronauts. A Sladden Production. <a href="#story">The Story</a> | <a href="#characters">Characters</a></p>
+    <p style="margin-top: 12px; font-size: 0.85rem;">In space, no one can hear you snack. 🍪🚀</p>
+  </footer>
+</body>
+</html>
